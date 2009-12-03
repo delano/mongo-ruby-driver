@@ -128,7 +128,9 @@ module Mongo
       @slave_ok = options[:slave_ok] && @nodes.length == 1
       @logger   = options[:logger] || nil
       @options  = options
-
+      
+      @logger = Logger.new(@logger) if String === @logger
+      
       should_connect = options[:connect].nil? ? true : options[:connect]
       connect_to_master if should_connect
     end
